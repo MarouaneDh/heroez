@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { getOneHero } from "../controllers/controllers";
-import AnimatedNumber from 'react-animated-number';
 
 import { GiAngelOutfit, GiBodyHeight, GiDevilMask, GiWeight } from 'react-icons/gi';
+import CountUp from "react-countup";
 
 const HeroPage = () => {
     const { id } = useParams()
@@ -12,14 +12,9 @@ const HeroPage = () => {
 
     const displayStats = (stat) => {
         return (
-            <AnimatedNumber component="text" value={stat}
-                style={{
-                    transition: '1s ease-out',
-                    fontSize: 20,
-                }}
-                stepPrecision={0.1}
-                duration={1000}
-                formatValue={n => n}
+            <CountUp
+                end={stat}
+                duration={1}
             />
         )
     }
