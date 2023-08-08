@@ -117,36 +117,9 @@ button {
 
 .hero-page-container {
     display: flex;
-    border-radius: 22px;
-    background: #828282;
-    box-shadow: inset 14px 14px 30px #626262,
-        inset -14px -14px 30px #a3a3a3;
-    margin: 50px;
-    height: 85vh;
-}
-
-.hero-page-image {
-    object-fit: cover;
-    width: 40%;
-    height: 100%;
-    border-radius: 22px;
-}
-
-@media (max-width:800px) {
-    .hero-page-container {
-        flex-direction: column;
-    }
-
-    .hero-page-image {
-        width: 100%;
-        height: 60%;
-    }
-}
-
-@media (max-width:500px) {
-    .hero-page-image {
-        height: 40%;
-    }
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
 }
 
 .good {
@@ -157,4 +130,69 @@ button {
 .evil {
     color: red;
     font-size: 60px;
+}
+
+.card {
+    width: 330px;
+    position: relative;
+    height: 585px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: 0.2s ease-in-out;
+}
+
+.img {
+    border-radius: 20px;
+    height: 100%;
+    position: absolute;
+    transition: 0.2s ease-in-out;
+    z-index: 1;
+}
+
+.textBox {
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: 0.2s ease-in-out;
+    z-index: 2;
+}
+
+.textBox>span {
+    font-size: 12px;
+    color: lightgrey;
+}
+
+.card:hover>.textBox {
+    opacity: 1;
+}
+
+.card:hover>.img {
+    height: 100%;
+    filter: blur(7px);
+    animation: anim 3s infinite;
+}
+
+@keyframes anim {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: scale(1.04) rotate(-1deg);
 }
