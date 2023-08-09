@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import OneHero from "../components/OneHero";
+import Loader from "../components/Loader";
 
 const ITEMS_PER_PAGE = 10;
 const MAX_VISIBLE_PAGES = 5;
@@ -7,6 +8,7 @@ const LOCAL_STORAGE_KEY = "currentPage";
 
 const Home = () => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(true);
 
     const totalHeroes = 733;
     const totalPages = Math.ceil(totalHeroes / ITEMS_PER_PAGE);
@@ -59,10 +61,16 @@ const Home = () => {
         return heroes;
     };
 
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 2500);
+    }, [])
+
     return (
         <div>
             <div className="heroes-list">
-                {displayHeroes()}
+                {loading ? <Loader /> : displayHeroes()}
             </div>
             <div className="pagination">
                 {renderPaginationButtons()}
