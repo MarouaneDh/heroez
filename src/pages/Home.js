@@ -1,20 +1,29 @@
-import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import OneHero from "../components/OneHero";
 
 const ITEMS_PER_PAGE = 10;
 const MAX_VISIBLE_PAGES = 5;
+const LOCAL_STORAGE_KEY = "currentPage";
 
 const Home = () => {
-    const { page } = useParams();
-    const currentPage = parseInt(page) || 1;
-    const navigate = useNavigate()
+    const [currentPage, setCurrentPage] = useState(1);
 
     const totalHeroes = 733;
     const totalPages = Math.ceil(totalHeroes / ITEMS_PER_PAGE);
 
+    useEffect(() => {
+        const savedPage = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (savedPage) {
+            const parsedPage = parseInt(savedPage);
+            if (parsedPage >= 1 && parsedPage <= totalPages) {
+                setCurrentPage(parsedPage);
+            }
+        }
+    }, [totalPages]);
+
     const handlePageChange = (newPage) => {
-        navigate(`/${newPage}`);
+        setCurrentPage(newPage);
+        localStorage.setItem(LOCAL_STORAGE_KEY, newPage);
     };
 
     const renderPaginationButtons = () => {
