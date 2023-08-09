@@ -50,9 +50,9 @@ const HeroPage = () => {
 
     return (
         hero && <div {...handlers} className="hero-page-container">
-            <div class="card">
+            <div className="card">
                 <img className="img" alt={hero.name} src={hero.image.url} />
-                <div class="textBox">
+                <div className="textBox">
                     <div className="hero-details">
                         <div>
                             {

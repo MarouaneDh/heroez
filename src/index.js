@@ -8,6 +8,7 @@ import {
 
 import Home from './pages/Home'
 import HeroPage from './pages/HeroPage'
+import ToggleMode from './components/ToggleMode';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
+    <ToggleMode />
     <RouterProvider router={router} />
   </React.StrictMode>
 );
