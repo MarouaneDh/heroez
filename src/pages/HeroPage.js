@@ -12,10 +12,12 @@ const HeroPage = () => {
 
     const displayStats = (stat) => {
         return (
-            <CountUp
-                end={stat}
-                duration={1}
-            />
+            <span className="one-stat">
+                <CountUp
+                    end={stat}
+                    duration={1}
+                />
+            </span>
         )
     }
 
@@ -46,11 +48,12 @@ const HeroPage = () => {
                                     <GiAngelOutfit className="good" /> :
                                     <GiDevilMask className="evil" />
                             }
-                            <h1>{hero?.name}</h1>
                         </div>
-                        <div className="hero-physique">
-                            <span>{hero.appearance.gender}{hero.appearance.race !== "null" ? " " + hero.appearance.race : ''}, {hero.appearance["hair-color"]}-haired and {hero.appearance["eye-color"]}-eyed </span>
-
+                        <div className="hero-name">
+                            <h1>{hero?.name}</h1>
+                            <h4>({hero.biography["full-name"]})</h4>
+                        </div>
+                        <div className="hero-body">
                             <div>
                                 <GiBodyHeight />
                                 <span>{hero.appearance.height[1]} ({hero.appearance.height[0]})</span>
@@ -60,7 +63,13 @@ const HeroPage = () => {
                                 <span>{hero.appearance.weight[1]} ({hero.appearance.weight[0]})</span>
                             </div>
                         </div>
-                        <div>
+                        <div className="hero-physique">
+                            <div>
+                                <span>{hero.appearance.race !== "null" ? " " + hero.appearance.race : ''} {hero.appearance.gender}, {hero.appearance["eye-color"]}-eyed{hero.appearance["hair-color"] === "No Hair" ? '' : ' and ' + hero.appearance["hair-color"] + '-haired'}. </span>
+                                <span>{hero.work.occupation === '-' ? '' : 'Works as ' + hero.work.occupation + ' '} {hero.work.base === '-' ? '' : 'based at ' + hero.work.base}</span>
+                            </div>
+                        </div>
+                        <div className="hero-stats">
                             <span>Combat : {displayStats(hero.powerstats?.combat)}</span>
                             <span>Durability : {displayStats(hero.powerstats?.durability)}</span>
                             <span>Intelligence : {displayStats(hero.powerstats?.intelligence)}</span>

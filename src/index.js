@@ -10,7 +10,7 @@ import Home from './pages/Home'
 import HeroPage from './pages/HeroPage'
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/:page",
     element: <Home />,
   },
   {

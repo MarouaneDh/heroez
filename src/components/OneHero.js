@@ -19,9 +19,15 @@ const OneHero = ({ id }) => {
     }, [id]);
 
     return (
-        <Link to={`/hero/${hero.id}`} className="hero-card">
-            {hero && <img className="hero-image" src={hero.image?.url} alt={hero.name} />}
-            {hero && <p>{hero.name}</p>}
+        hero && <Link to={`/hero/${hero.id}`} className="coin-container">
+            <div class="coin">
+                <div class="side heads">
+                    <img className="hero-image" src={hero.image?.url} alt={hero.name} />
+                </div>
+                <div class="side tails">
+                    <img className="hero-image" src={hero.image?.url} alt={hero.name} />
+                </div>
+            </div>
         </Link>
     );
 };

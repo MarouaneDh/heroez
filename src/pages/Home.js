@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
+import { useParams, Link, Outlet, useNavigate } from "react-router-dom"; // Import the useParams and Link components
 import OneHero from "../components/OneHero";
 
 const ITEMS_PER_PAGE = 10;
 const MAX_VISIBLE_PAGES = 5; // Maximum number of visible pagination buttons
 
 const Home = () => {
-    const [currentPage, setCurrentPage] = useState(1);
+    const { page } = useParams(); // Get the 'page' parameter from the URL
+    const currentPage = parseInt(page) || 1; // Convert page to integer or default to 1
+    const navigate = useNavigate()
 
     const totalHeroes = 733;
     const totalPages = Math.ceil(totalHeroes / ITEMS_PER_PAGE);
 
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
+    const handlePageChange = (newPage) => {
+        // Update the URL with the new page number
+        navigate(`/${newPage}`);
     };
 
     const renderPaginationButtons = () => {
@@ -40,7 +44,7 @@ const Home = () => {
     const displayHeroes = () => {
         const heroes = [];
 
-        for (let i = startIndex + 1; i < endIndex; i++) {
+        for (let i = startIndex + 1; i <= endIndex; i++) {
             heroes.push(<OneHero id={i} key={i} />);
         }
 
