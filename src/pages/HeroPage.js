@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { getOneHero } from "../controllers/controllers";
 
 import { GiAngelOutfit, GiBodyHeight, GiDevilMask, GiWeight } from 'react-icons/gi';
 import CountUp from "react-countup";
+import { useSwipeable } from "react-swipeable";
 
 const HeroPage = () => {
     const { id } = useParams()
     const [hero, setHero] = useState('');
+    const navigate = useNavigate()
 
     const displayStats = (stat) => {
         return (
@@ -30,14 +32,24 @@ const HeroPage = () => {
                 console.log('Error:', error);
             }
         };
-
         fetchHeroData();
     }, [id]);
 
-    console.log(hero)
+    const handleSwipeLeft = () => {
+        navigate('/hero/' + (+id + 1))
+    }
+
+    const handleSwipeRight = () => {
+        navigate('/hero/' + (+id - 1))
+    }
+
+    const handlers = useSwipeable({
+        onSwipedLeft: () => handleSwipeLeft(),
+        onSwipedRight: () => handleSwipeRight()
+    });
 
     return (
-        hero && <div className="hero-page-container">
+        hero && <div {...handlers} className="hero-page-container">
             <div class="card">
                 <img className="img" alt={hero.name} src={hero.image.url} />
                 <div class="textBox">
